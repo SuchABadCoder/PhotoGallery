@@ -11,11 +11,31 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous">
 </head>
-<body class="m-5">
-    <div class="container">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'gallery' %}">Photo Gallery</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                    </ul>
+                </div>
+        </div>
+    </nav>
+    <div class="container m-5">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <a href="{% url 'gallery' %}" class="btn btn-dark my-3">Go Back</a>
                 <div class="card">
                     <form method="POST" action="" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -45,7 +65,7 @@
                             <input required name="image" type="file" class="form-control-file">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary m-1">Submit</button>
                     </form>
                 </div>
             </div>
